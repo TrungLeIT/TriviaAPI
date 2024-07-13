@@ -95,14 +95,14 @@ There are four types of errors the API will return`;
 - Sample: `curl http://127.0.0.1:5000/categories`
 ```
 {
-  "categories: {
-    '1' : "Science",
-    '2' : "Art",
-    '3' : "Geography",
-    '4' : "History",
-    '5' : "Entertainment",
-    '6' : "Sports"
-    },
+  "categories": {
+    "1": "Science",
+    "2": "Art",
+    "3": "Geography",
+    "4": "History",
+    "5": "Entertainment",
+    "6": "Sports"
+  },
   "success": true
 }
 ```
@@ -237,18 +237,7 @@ There are four types of errors the API will return`;
 
 #### POST '/questions'
 - Creates a new question using JSON request parameters in the database
-- Sample: `curl http://127.0.0.1:5000/questions -X POST -H "Content-Type: application/json" -d '{"question": "which is the champion team of the champions 2020?", "answer": "Bayern", "difficulty": 3, "category": "6" }'`
-- Created question:
-```
-{
-    "id": 25,
-    "question": "which is the champion team of the champions 2020?",
-    "answer": "Bayern", 
-    "difficulty": 3,
-    "category": 6
-}
-```
-- JSON response:
+- Sample: `curl http://127.0.0.1:5000/questions -X POST -H "Content-Type: application/json" -d "{\"question\": \"which is the champion team of the champions 2020?\", \"answer\": \"Bayern\", \"difficulty\": 3, \"category\": \"6\"}"`
 ```
 {
   "created": 25,
@@ -333,7 +322,7 @@ There are four types of errors the API will return`;
 #### POST '/questions'
 - Searches for questions using a search term, 
 - Returns a JSON object with paginated questions matching the search term
-- Sample: `curl http://127.0.0.1:5000/questions -X POST -H "Content-Type: application/json" -d '{"searchTerm": "author"}'`
+- Sample: `curl http://127.0.0.1:5000/questions -X POST -H "Content-Type: application/json" -d "{\"searchTerm\": \"author\"}"`
 ```
 {
   "questions": [
@@ -368,15 +357,15 @@ There are four types of errors the API will return`;
 - Allows user to play the trivia game
 - Uses JSON request parameters of a chosen category and previous questions
 - Returns JSON object with random available questions which are not among previous used questions
-- Sample: `curl http://127.0.0.1:5000/play -X POST -H "Content-Type: application/json" -d '{"previous_questions": [10, 11], "quiz_category": {"type": "Sports", "id": "6"}}'`
+- Sample: `curl http://127.0.0.1:5000/play -X POST -H "Content-Type: application/json" -d "{\"previous_questions\": [10, 11], \"quiz_category\": {\"type\": \"Sports\", \"id\": \"5\"}}"`
 ```
 {
   "question": {
-    "answer": "Bayern",
-    "category": 6,
-    "difficulty": 3,
-    "id": 25,
-    "question": "which is the champion team of the champions 2020?"
+    "answer": "Tom Cruise",
+    "category": 5,
+    "difficulty": 4,
+    "id": 4,
+    "question": "What actor did author Anne Rice first denounce, then praise in the role of her beloved Lestat?"
   },
   "success": true
 }
