@@ -89,59 +89,6 @@ There are four types of errors the API will return`;
 
 ### Endpoints
 
-#### GET '/categories'
-- Fetches a dictionary of all available categories.
-- Returns an object with a single key, categories, that contains a object of id: category_string key:value pairs. 
-- Sample: `curl http://127.0.0.1:5000/categories`
-```
-{
-  "categories": {
-    "1": "Science",
-    "2": "Art",
-    "3": "Geography",
-    "4": "History",
-    "5": "Entertainment",
-    "6": "Sports"
-  },
-  "success": true
-}
-```
-
-#### GET '/categories/<int:id>/questions'
-- Gets all questions in a specified category by id using url parameters
-- Returns a JSON object with paginated questions from a specified category
-- Sample: `curl http://127.0.0.1:5000/categories/3/questions`
-```
-{
-  "current_category": "Geography",
-  "questions": [
-    {
-      "answer": "Lake Victoria",
-      "category": 3,
-      "difficulty": 2,
-      "id": 13,
-      "question": "What is the largest lake in Africa?"
-    },
-    {
-      "answer": "The Palace of Versailles",
-      "category": 3,
-      "difficulty": 3,
-      "id": 14,
-      "question": "In which royal palace would you find the Hall of Mirrors?"
-    },
-    {
-      "answer": "Agra",
-      "category": 3,
-      "difficulty": 2,
-      "id": 15,
-      "question": "The Taj Mahal is located in which Indian city?"
-    }
-  ],
-  "success": true,
-  "total_questions": 20
-}
-```
-
 #### GET '/questions'
 - Returns a list of questions
   - Includes a list of categories
@@ -240,16 +187,9 @@ There are four types of errors the API will return`;
 - Sample: `curl http://127.0.0.1:5000/questions -X POST -H "Content-Type: application/json" -d "{\"question\": \"which is the champion team of the champions 2020?\", \"answer\": \"Bayern\", \"difficulty\": 3, \"category\": \"6\"}"`
 ```
 {
-  "created": 25,
+  "created": 26,
   "question_created": "which is the champion team of the champions 2020?",
   "questions": [
-    {
-      "answer": "Apollo 13",
-      "category": 5,
-      "difficulty": 4,
-      "id": 2,
-      "question": "What movie earned Tom Hanks his third straight Oscar nomination, in 1996?"
-    },
     {
       "answer": "Tom Cruise",
       "category": 5,
@@ -312,6 +252,13 @@ There are four types of errors the API will return`;
       "difficulty": 3,
       "id": 14,
       "question": "In which royal palace would you find the Hall of Mirrors?"
+    },
+    {
+      "answer": "Agra",
+      "category": 3,
+      "difficulty": 2,
+      "id": 15,
+      "question": "The Taj Mahal is located in which Indian city?"
     }
   ],
   "success": true,
@@ -322,36 +269,94 @@ There are four types of errors the API will return`;
 #### POST '/questions'
 - Searches for questions using a search term, 
 - Returns a JSON object with paginated questions matching the search term
-- Sample: `curl http://127.0.0.1:5000/questions -X POST -H "Content-Type: application/json" -d "{\"searchTerm\": \"author\"}"`
+- Sample: `curl http://127.0.0.1:5000/questions -X POST -H "Content-Type: application/json" -d "{\"searchTerm\": \"world cup\"}"`
 ```
 {
   "questions": [
     {
-      "answer": "Tom Cruise",
-      "category": 5,
+      "answer": "Brazil",
+      "category": 6,
+      "difficulty": 3,
+      "id": 10,
+      "question": "Which is the only team to play in every soccer World Cup tournament?"
+    },
+    {
+      "answer": "Uruguay",
+      "category": 6,
       "difficulty": 4,
-      "id": 4,
-      "question": "What actor did author Anne Rice first denounce, then praise in the role of her beloved Lestat?"
+      "id": 11,
+      "question": "Which country won the first ever soccer World Cup in 1930?"
     }
   ],
   "success": true,
-  "total_questions": 1
+  "total_questions": 2
 }
 ```
 
 #### DELETE '/questions/<int:id>'
 - Deletes a question by id using url parameters
 - Returns id of deleted questions if successful
-- Sample: `curl -X DELETE http://127.0.0.1:5000/questions/2`
+- Sample: `curl -X DELETE http://127.0.0.1:5000/questions/4`
 ```
 {
-  "deleted": 2,
+  "deleted": 4,
   "success": true,
   "total_questions": 20
 }
 ```
 
+#### GET '/categories'
+- Fetches a dictionary of all available categories.
+- Returns an object with a single key, categories, that contains a object of id: category_string key:value pairs. 
+- Sample: `curl http://127.0.0.1:5000/categories`
+```
+{
+  "categories": {
+    "1": "Science",
+    "2": "Art",
+    "3": "Geography",
+    "4": "History",
+    "5": "Entertainment",
+    "6": "Sports"
+  },
+  "success": true
+}
+```
 
+#### GET '/categories/<int:id>/questions'
+- Gets all questions in a specified category by id using url parameters
+- Returns a JSON object with paginated questions from a specified category
+- Sample: `curl http://127.0.0.1:5000/categories/3/questions`
+```
+{
+  "current_category": "Geography",
+  "questions": [
+    {
+      "answer": "Lake Victoria",
+      "category": 3,
+      "difficulty": 2,
+      "id": 13,
+      "question": "What is the largest lake in Africa?"
+    },
+    {
+      "answer": "The Palace of Versailles",
+      "category": 3,
+      "difficulty": 3,
+      "id": 14,
+      "question": "In which royal palace would you find the Hall of Mirrors?"
+    },
+    {
+      "answer": "Agra",
+      "category": 3,
+      "difficulty": 2,
+      "id": 15,
+      "question": "The Taj Mahal is located in which Indian city?"
+    }
+  ],
+  "success": true,
+  "total_questions": 20
+}
+```
 
 #### POST '/play'
 - Allows user to play the trivia game
@@ -361,11 +366,11 @@ There are four types of errors the API will return`;
 ```
 {
   "question": {
-    "answer": "Tom Cruise",
+    "answer": "Edward Scissorhands",
     "category": 5,
-    "difficulty": 4,
-    "id": 4,
-    "question": "What actor did author Anne Rice first denounce, then praise in the role of her beloved Lestat?"
+    "difficulty": 3,
+    "id": 6,
+    "question": "What was the title of the 1990 fantasy directed by Tim Burton about a young man with multi-bladed appendages?"
   },
   "success": true
 }
